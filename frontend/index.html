@@ -42,7 +42,9 @@
                             <img id="input_img" src="website_img/temp_image.png">
                         </div>
                     </div>
-                    <div class="prediction">
+
+                    <div class="predictionandlabel">
+                        <p id="label">Actual class:  </p>
                         <p id="prediction">Predicted class:  </p>
                     </div>
 
@@ -114,10 +116,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Listen for the 'prediction' event from the server
     socket.on("prediction", function (data) {
-        var prediction = data.data;
-        console.log(prediction)
+        var prediction = data.prediction;
+        var actual_label = data.actual_label;
+        console.log(prediction);
+
         const responseText = document.getElementById('prediction');
         responseText.textContent = 'Predicted number: ' + String(prediction);
+
+        const actLabel = document.getElementById('label');
+        actLabel.textContent = 'Actual number: ' + String(actual_label);
+
+
 
     });
 

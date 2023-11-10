@@ -69,7 +69,7 @@ body {
     width: 50%; /* Take up the full width of the image container */
 }
 
-.prediction{
+.predictionandlabel{
     position: absolute;
     top: 21vh;
     left: 950px;

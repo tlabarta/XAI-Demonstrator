@@ -62,7 +62,7 @@ async def select_input(sid, data):
     random_index = random.randint(0, len(testset) - 1)
 
     # Get the image tensor based on the random index
-    image_tensor = testset[random_index][0].unsqueeze(0)
+    image_tensor, actual_label = testset[random_index]
 
     # Get the selected XAI method from the client
     xai_method = data.get('xai_method', 'lrp')
@@ -88,7 +88,7 @@ async def select_input(sid, data):
 
     # Send the random image path to the client
     await sio.emit('input_image', {'data': random_image_path}, room=sid)
-    await sio.emit('prediction', {'data': prediction}, room=sid)
+    await sio.emit('prediction', {'prediction': prediction, 'actual_label': actual_label}, room=sid)
     if heatmap is not None:
         await sio.emit('heatmap', {'data': heatmap}, room=sid)
 
