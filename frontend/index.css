@@ -1,137 +1,277 @@
-.macbook-pro-14-1-child {
+body {
+    margin: 0px;
+    overflow: hidden;
+    font-family: 'Mulish', sans-serif;
+}
+
+.title {
+    margin-top: 8vh;
+    margin-bottom: 6vh;
+    display: flex;
+    color: black;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 600;
+}
+
+.title > span {
+    font-size: 28pt;
+    color: #515151;
+}
+
+.title > img{
+    height: 10vh;
+}
+
+#pred {
+    margin:0px;
+}
+
+.input {
+    border-radius: 10px;
+    background: #FFFDFD;
+    display:flex;
+    flex-direction: column;
+}
+
+.header {
+    background: #3A64F2;
+    color: #7DEDED;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px 0px 10px 15px;
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.output {
+    background: #F8F8F8;
+    display:flex;
+    flex-direction: column;
+    margin: 15px;
+    width: 50%;
+}
+
+.top-row{
+    display:flex;
+    flex-direction:column;
+    row-gap: 100px;
+    margin: 20px;
+    flex: 1;
+
+}
+
+.smallpane_input{
+    width: 50%; /* Take up the full width of the image container */
+}
+
+.smallpane_explanation{
+    width: 50%; /* Take up the full width of the image container */
+}
+
+.prediction{
+    position: absolute;
+    top: 21vh;
+    left: 950px;
+}
+
+.bot-row{
+    margin: 5vh 40 0 50;
+    flex:1;
+}
+
+
+.pane{
+    border-radius:10px;
+    flex:1;
+    margin:15px;
+    height: 100%;
+    background: #f8f8f8;
+}
+
+.shadowed{
+    box-shadow: 0px 0px 2px 2px #EDEDED,
+    0px 0px 4px 4px#F0F0F0,
+     0px 0px 6px 6px #F2F2F2,
+      0px 0px 8px 8px #F4F4F4,
+      0px 0px 10px 10px #F6F6F6,
+      0px 0px 12px 12px #F8F8F8
+}
+
+.input-container {
+    margin: 30px;
+    border-radius: 10px;
+    background: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.smallpane{
+    flex:1;
+    margin: 10px;
+    width: 50%;
+    border-radius:10px;
+    background: #FFFDFD;
+    display: flex;
+    flex-direction: column;
+}
+
+#photo {
+    width: 80%;
+    height: 95%;
+    object-fit: cover;
+}
+
+#canvas {
+    display: none;
+}
+
+.camera {
+    display: flex;
+    flex:1;
+    align-items: center;
+    justify-content: center;
+}
+
+#video {
+    width: 80%;
+    height: 95%;
+    object-fit: cover;
+}
+
+.main {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    height: 100%;
+}
+
+.footnotes{
+    margin-left: 30px;
+    margin-right: 30px;
+    color: black;
+}
+
+.container {
+    display: flex;
+    flex:1;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.pictures {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+
+rect {
+    fill-opacity: 0.8;
+    stroke: none;
+}
+
+rect:hover {
+    fill-opacity: 1;
+}
+
+.axis {
+    font-size: smaller;
+}
+
+.contentarea {
+    font-size: 16px;
+    font-family: Arial;
+    text-align: center;
+}
+
+.logos  {
+    align-self: start;
+    position: absolute;
+    margin: 15 30 15 30;
+}
+
+.logos > img{
+    width: 175px;
+    height: 70px;
+}
+
+.logos > img:last-child{
+    margin-bottom: 8px;
+}
+
+.input {
+    height: 300px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+  }
+
+
+/* Style action button */
+.action_button {
+  width: 60px;
+  height: 49px;
   position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #009474;
-  width: 1512px;
-  height: 144px;
-}
-.hhi-logo-de-1-icon {
-  position: absolute;
-  top: 14px;
-  left: 0;
-  width: 334px;
-  height: 116px;
-  overflow: hidden;
-}
-.macbook-pro-14-1-inner,
-.macbook-pro-14-1-item,
-.rectangle-div {
-  position: absolute;
-  top: calc(50% - 245px);
-  left: 59px;
-  border-radius: var(--br-xl);
-  background-color: var(--color-azure);
-  width: 459px;
-  height: 326px;
-}
-.macbook-pro-14-1-inner,
-.rectangle-div {
-  left: 636px;
-  width: 775px;
-  height: 689px;
-}
-.rectangle-div {
-  top: calc(50% + 115px);
-  left: 59px;
-  width: 459px;
-  height: 326px;
-}
-.xai-demo {
-  position: absolute;
-  top: 14px;
-  left: 664px;
-  font-size: var(--font-size-45xl);
-  display: flex;
-  color: var(--color-white);
-  align-items: center;
-  justify-content: center;
-  width: 469px;
-  height: 120px;
-}
-.macbook-pro-14-1-child1,
-.rectangle-icon {
-  position: absolute;
-  top: 308px;
-  left: 109px;
-  width: 359px;
-  height: 250px;
-  object-fit: cover;
-}
-.macbook-pro-14-1-child1 {
-  top: 667px;
-}
-.macbook-pro-14-1-child2 {
-  position: absolute;
-  top: 309px;
-  left: 696px;
-  background-color: #d9d9d9;
-  width: 655px;
-  height: 609px;
-}
-.dropdown {
+  top: 21vh;
+  left: 90px;
+  background-color: #ccc;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  border: none;
+  color: #4d4d4d;
+  font-size: 12px;
   cursor: pointer;
-  border: 0;
-  padding: 0;
-  background-color: transparent;
+  border-radius: 30%;
+
+}
+
+.action_button:hover,
+.action_button.hover{
+  background-color: #7C7C7C;
+}
+
+.action_button:active,
+.action_button.active{
+  transform: translateY(2px);
+}
+
+.action_button i {
   position: relative;
-  font-size: var(--font-size-5xl);
-  font-weight: 700;
-  font-family: var(--font-inter);
-  color: var(--color-black);
-  text-align: center;
-  display: inline-block;
-  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  font-size: 32px;
+  color: white;
+  border: none;
 }
-.dropdown-wrapper,
-.explanation,
-.input,
-.network-visualization {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+#xaiMethodDropdown {
+        padding: 8px;
+        font-size: 12px; /* Adjust the font size to match your action button */
+        position: absolute;
+        width: 60px;
+        top: 30vh;
+        left: 90px; /* Adjust the left position to align with your action button */
+        background-color: #ccc;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        border: none;
+        color: #4d4d4d;
+        cursor: pointer;
+        border-radius: 30%;
+        z-index: 1; /* Ensure it appears above other elements */
+    }
+
+.xaiMethodDropdown:hover,
+.xaiMethodDropdown.hover {
+    background-color: #7C7C7C;
 }
-.dropdown-wrapper {
-  top: 171px;
-  left: 59px;
-  flex-direction: row;
-  padding: 10px;
-}
-.explanation,
-.input,
-.network-visualization {
-  top: 274px;
-  left: 206px;
-  width: 164px;
-  height: 35px;
-}
-.explanation,
-.network-visualization {
-  top: 632px;
-}
-.network-visualization {
-  top: 274px;
-  left: 876px;
-  width: 295px;
-}
-.macbook-pro-14-1,
-.wireframe-1 {
-  background-color: var(--color-white);
-  height: 1024px;
-  overflow: hidden;
-}
-.macbook-pro-14-1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1440px;
-}
-.wireframe-1 {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  font-size: var(--font-size-5xl);
-  color: var(--color-black);
-  font-family: var(--font-inter);
-}
+
+.xaiMethodDropdown:active,
+.xaiMethodDropdown.active {
+    transform: translateY(2px);}
+
