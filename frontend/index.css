@@ -1,0 +1,137 @@
+.macbook-pro-14-1-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #009474;
+  width: 1512px;
+  height: 144px;
+}
+.hhi-logo-de-1-icon {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 334px;
+  height: 116px;
+  overflow: hidden;
+}
+.macbook-pro-14-1-inner,
+.macbook-pro-14-1-item,
+.rectangle-div {
+  position: absolute;
+  top: calc(50% - 245px);
+  left: 59px;
+  border-radius: var(--br-xl);
+  background-color: var(--color-azure);
+  width: 459px;
+  height: 326px;
+}
+.macbook-pro-14-1-inner,
+.rectangle-div {
+  left: 636px;
+  width: 775px;
+  height: 689px;
+}
+.rectangle-div {
+  top: calc(50% + 115px);
+  left: 59px;
+  width: 459px;
+  height: 326px;
+}
+.xai-demo {
+  position: absolute;
+  top: 14px;
+  left: 664px;
+  font-size: var(--font-size-45xl);
+  display: flex;
+  color: var(--color-white);
+  align-items: center;
+  justify-content: center;
+  width: 469px;
+  height: 120px;
+}
+.macbook-pro-14-1-child1,
+.rectangle-icon {
+  position: absolute;
+  top: 308px;
+  left: 109px;
+  width: 359px;
+  height: 250px;
+  object-fit: cover;
+}
+.macbook-pro-14-1-child1 {
+  top: 667px;
+}
+.macbook-pro-14-1-child2 {
+  position: absolute;
+  top: 309px;
+  left: 696px;
+  background-color: #d9d9d9;
+  width: 655px;
+  height: 609px;
+}
+.dropdown {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: relative;
+  font-size: var(--font-size-5xl);
+  font-weight: 700;
+  font-family: var(--font-inter);
+  color: var(--color-black);
+  text-align: center;
+  display: inline-block;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+.dropdown-wrapper,
+.explanation,
+.input,
+.network-visualization {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dropdown-wrapper {
+  top: 171px;
+  left: 59px;
+  flex-direction: row;
+  padding: 10px;
+}
+.explanation,
+.input,
+.network-visualization {
+  top: 274px;
+  left: 206px;
+  width: 164px;
+  height: 35px;
+}
+.explanation,
+.network-visualization {
+  top: 632px;
+}
+.network-visualization {
+  top: 274px;
+  left: 876px;
+  width: 295px;
+}
+.macbook-pro-14-1,
+.wireframe-1 {
+  background-color: var(--color-white);
+  height: 1024px;
+  overflow: hidden;
+}
+.macbook-pro-14-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1440px;
+}
+.wireframe-1 {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: var(--font-size-5xl);
+  color: var(--color-black);
+  font-family: var(--font-inter);
+}
