@@ -5,7 +5,7 @@
 
 
 <head>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="new_css_test.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800&display=swap"
@@ -40,13 +40,14 @@
                         </div>
                         <div class='input'>
                             <img id="input_img" src="website_img/temp_image.png">
+                            <div class="predictionandlabel">
+                                <p id="label">Actual class:  </p>
+                                <p id="prediction">Predicted class:  </p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="predictionandlabel">
-                        <p id="label">Actual class:  </p>
-                        <p id="prediction">Predicted class:  </p>
-                    </div>
+
 
                     <div class="smallpane_explanation">
                         <div class="header">
@@ -57,24 +58,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="xai_info">
+                    <p>This is now just some filler text to provide information about an existing XAI method. Blablajdnbajsdnlakkjnd. dahjksdnk akdjasjkdn fsjkdnfkjsdn fsndkjnsfkj.</p>
+                </div>
 
             </div>
 
-            <div class="input pane">
-                <div class="input-container shadowed">
+            <div class="network pane">
+                <div class="network-container">
                     <div class="header">
                         <span>Network</span>
                     </div>
-                    <div class="camera">
-                        <video id="video">Video stream not available.</video>
-                    </div>
+                    <div class="network"> </div>
+                        <object id="network-svg" data="website_img/nn.svg" type="image/svg+xml" width="100%" height="100%"style="max-width: 100%; max-height: 100%;">
+                        Your browser does not support SVG
+                        </object>
                 </div>
-        </div>
-        <div id="graphic"></div>
+            </div>
 
     </div>
-
-    <canvas id="canvas"></canvas>
 
 </body>
 

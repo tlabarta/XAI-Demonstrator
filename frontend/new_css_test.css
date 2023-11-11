@@ -1,0 +1,148 @@
+/* new_css_test.css */
+
+body {
+    font-family: 'Mulish', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #009474;
+    padding: 10px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+.title {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #009474;
+    text-align: center;
+    font-weight: bold;
+}
+
+.controls {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.action_button {
+    background-color: #009474;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+.action_button:hover,
+.action_button.hover{
+  background-color: #7C7C7C;
+}
+
+.action_button:active,
+.action_button.active{
+  transform: translateY(2px);
+}
+
+.action_button i {
+  position: relative;
+  z-index: 1;
+  font-size: 32px;
+  color: white;
+  border: none;
+}
+
+#xaiMethodDropdown {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #009474;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.output.pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 35%;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.network.pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 55%;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+/* Updated styles for image titles and text */
+.smallpane_input .header,
+.smallpane_explanation .header,
+.network.pane .header {
+    background-color: #009474;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.top-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.smallpane_input,
+.smallpane_explanation {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.input img,
+.explanation img {
+    display: block;
+    margin: 0 auto 10px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Added styles for centering text below the image */
+.predictionandlabel {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+
+
+/* Updated styles for the network header */
+
+
+.network {
+    max-width: 100%;
+    max-height: 100%;
+}
