@@ -1,6 +1,5 @@
 from aiohttp import web
 import socketio
-from heatmap_service import HeatmapService
 import argparse
 import random
 from torchvision import datasets, transforms
@@ -8,6 +7,9 @@ import os
 from PIL import Image
 import torch
 from model import Net
+
+from crpAnalyze import CRPAnalyzer
+
 
 
 
@@ -55,6 +57,7 @@ def connect(sid, environ):
 async def button_click(sid, data):
     # Call select_input when the button is clicked
     await select_input(sid, data)
+    await explain_prediction(sid, data)
 
 @sio.event
 async def select_input(sid, data):
@@ -64,14 +67,12 @@ async def select_input(sid, data):
     # Get the image tensor based on the random index
     image_tensor, actual_label = testset[random_index]
 
-
     # Get model prediction
     prediction = get_prediction(net, image_tensor)
 
-
     # Get the image path based on the random index
     save_rand_img(testset[random_index])
-    random_image_path = "website_img/temp_image.png"
+    random_image_path = "website_img/input.png"
 
     # Send the random image path to the client
     await sio.emit('input_image', {'data': random_image_path}, room=sid)
@@ -81,24 +82,29 @@ async def select_input(sid, data):
 @sio.event
 async def explain_prediction(sid, data):
     # Get the selected XAI method from the client
-    xai_method = data.get('xai_method', 'lrp')
+    xai_method = data.get('xai_method')
+    print(xai_method)
 
-    heatmap = None
+    heatmap_path = None
 
     # Generate heatmap based on the selected XAI method
     if xai_method == 'lrp':
         #heatmap = generate_lrp_heatmap(model, image_tensor)
         print("lrp success")
-    elif xai_method == 'shap':
-        #heatmap = generate_shap_heatmap(model, image_tensor)
-        print("shap success")
+    elif xai_method == 'crp':
+        # Create an instance of CRPAnalyzer
+        crp_analyzer = CRPAnalyzer(net)
+
+        # Call the explain_prediction method to get the heatmap
+        heatmap_path = crp_analyzer.explain_prediction()
+        print(heatmap_path)
+
+        print("crp success")
     else:
-        heatmap = None
+        heatmap_path = None
 
-    heatmap_path = "website_img/heatmap.png"
-
-    if heatmap is not None:
-        await sio.emit('heatmap', {'data': heatmap}, room=sid)
+    if heatmap_path is not None:
+        await sio.emit('heatmap', {'data': heatmap_path}, room=sid)
 
 
 
@@ -116,7 +122,7 @@ def save_rand_img(sample, target_size=(640, 480)):
     resized_image = Image.fromarray(image_array.squeeze(), mode='L').resize(target_size)
 
     # Save the resized image as an image file
-    temp_file_path = "frontend/website_img/temp_image.png"
+    temp_file_path = "frontend/website_img/input.png"
     resized_image.save(temp_file_path)
 
 

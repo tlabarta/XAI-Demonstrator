@@ -28,7 +28,7 @@
         <button class="action_button" id="action_button"><i class="fa fa-refresh"></i></button>
         <select id="xaiMethodDropdown">
             <option value="lrp">LRP</option>
-            <option value="shap">CRP</option>
+            <option value="crp">CRP</option>
         </select>
 
         <div class="container">
@@ -82,28 +82,38 @@
 
     const socket = io();
 
-    // Add an event listener to trigger the 'videoframe' event when the page loads
-document.addEventListener('DOMContentLoaded', function () {
-    // For example, if you have a dataset ID to specify which dataset to use
-
     // Get the selected XAI method from the dropdown
     var xaiMethodSelector = document.getElementById('xaiMethodDropdown');
     var selectedXaiMethod = xaiMethodSelector.value;
 
-    // Emit 'videoframe' event with dataset ID and selected XAI method
-    socket.emit('select_input', {xai_method: selectedXaiMethod });
+    // Add an event listener to trigger the 'videoframe' event when the page loads
+    document.addEventListener('DOMContentLoaded', function () {
+        // For example, if you have a dataset ID to specify which dataset to use
 
-    // Add an event listener for the change event on the dropdown
-    xaiMethodSelector.addEventListener('change', function () {
-        // Emit 'explain_prediction' event with updated XAI method
+
+        // Emit 'videoframe' event with dataset ID and selected XAI method
+        socket.emit('select_input', {xai_method: selectedXaiMethod });
         socket.emit('explain_prediction', {xai_method: xaiMethodSelector.value });
+
+               // Add an event listener for the change event on the dropdown
+        xaiMethodSelector.addEventListener('change', function () {
+            // Emit 'explain_prediction' event with updated XAI method
+            socket.emit('explain_prediction', {xai_method: xaiMethodSelector.value });
+
+        });
+
     });
-});
+
+    xaiMethodSelector.addEventListener('change', function () {
+    // Emit 'explain_prediction' event with updated XAI method
+    socket.emit('explain_prediction', {xai_method: xaiMethodSelector.value });
+
+    });
 
     // Event listener for the button click
     document.getElementById('action_button').addEventListener('click', function () {
         // Emit a custom event to the server
-        socket.emit('button_click', {});
+        socket.emit('button_click', {xai_method: xaiMethodSelector.value });
     });
 
     // Listen for the 'input_image' event from the server
@@ -132,10 +142,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Listen for the 'heatmap' event from the server
     socket.on("heatmap", function (data) {
-        var bytes = new Uint8Array(data.data);
-        console.log(bytes)
-        // Update your HTML to display the heatmap
-        // ...
+        var heatmapResponse = data.data;
+        console.log(heatmapResponse)
+        document.getElementById('explanation_img').src = heatmapResponse + '?' + new Date().getTime();
+
+
     });
 
 
