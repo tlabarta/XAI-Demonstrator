@@ -15,7 +15,7 @@
 
 <body>
     <div class="logos">
-       <img src="website_img/Fraunhofer_HHI.png">
+       <img src="website_img/Fraunhofer_HHI.png" width="261px" height="71px">
     </div>
 
     <div class="main">
@@ -55,11 +55,15 @@
                         </div>
                         <div class="explanation">
                             <img id="explanation_img" src="website_img/heatmap.png">
+                            <div class="predictionandlabel">
+                                <p id="currentXAIselection">XAI Method:  </p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="xai_info">
-                    <p>This is now just some filler text to provide information about an existing XAI method. Blablajdnbajsdnlakkjnd. dahjksdnk akdjasjkdn fsjkdnfkjsdn fsndkjnsfkj.</p>
+                    <p id="lrpInfo" class="xai-info-text">Layer-wise Relevance Propagation (LRP) is a technique that brings such explainability and scales to potentially highly complex deep neural networks. It operates by propagating the prediction backward in the neural network, using a set of purposely designed propagation rules <a href="https://doi.org/10.1007/978-3-030-28954-6_10">(Montavon et al. 2019)</a>. </p>
+                    <p id="crpInfo" class="xai-info-text">Concept Relevance Propagation (CRP) is a cutting-edge explainability method for deep neural networks that allows for the understanding of AI predictions on the concept level. As an advancement of LRP, CRP indicates not only which input features are relevant, but also communicates which concepts are used, where they are located in the input and which parts of the neural network are responsible. Thus, CRP sets new standards in AI validation and interaction with a high level of human-understandability <a href="https://www.hhi.fraunhofer.de/en/departments/ai/technologies-and-solutions/concept-relevance-propagation.html">(Samek et al.)</a>. </p>
                 </div>
 
             </div>
@@ -70,7 +74,7 @@
                         <span>Network</span>
                     </div>
                     <div class="network"> </div>
-                        <object id="network-svg" data="website_img/nn.svg" type="image/svg+xml" width="100%" height="100%"style="max-width: 100%; max-height: 100%;">
+                        <object id="network-svg" data="website_img/nn.svg" type="image/svg+xml" style="width: 100%; max-width: 100%; height: 100%;">
                         Your browser does not support SVG
                         </object>
                 </div>
@@ -90,7 +94,8 @@
 
     // Add an event listener to trigger the 'videoframe' event when the page loads
     document.addEventListener('DOMContentLoaded', function () {
-        // For example, if you have a dataset ID to specify which dataset to use
+        // Set explanation text to default
+        updateXaiInfoText(xaiMethodSelector.value);
 
 
         // Emit 'videoframe' event with dataset ID and selected XAI method
@@ -100,6 +105,7 @@
                // Add an event listener for the change event on the dropdown
         xaiMethodSelector.addEventListener('change', function () {
             // Emit 'explain_prediction' event with updated XAI method
+            updateXaiInfoText(xaiMethodSelector.value);
             socket.emit('explain_prediction', {xai_method: xaiMethodSelector.value });
 
         });
@@ -150,6 +156,28 @@
 
 
     });
+
+        // Function to update xai_info text based on the selected value
+    function updateXaiInfoText(selectedXaiMethod) {
+        // Hide all xai-info-text elements
+        document.querySelectorAll('.xai-info-text').forEach(function(element) {
+            element.style.display = 'none';
+        });
+
+        // Show the relevant xai-info-text based on the selected XAI method
+        switch (selectedXaiMethod) {
+            case 'lrp':
+                document.getElementById('lrpInfo').style.display = 'block';
+                break;
+            case 'crp':
+                document.getElementById('crpInfo').style.display = 'block';
+                break;
+            // Add more cases as needed for other XAI methods
+            // ...
+        }
+    }
+
+
 
 
 </script>

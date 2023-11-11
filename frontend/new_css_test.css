@@ -6,20 +6,13 @@ body {
     padding: 0;
 }
 
-header {
-    background-color: #009474;
-    padding: 10px;
-    text-align: center;
-    font-size: 32px;
-    font-weight: bold;
-}
 
 main {
     padding: 20px;
 }
 
 .title {
-    font-size: 48px;
+    font-size: 32px;
     margin-bottom: 20px;
     color: #009474;
     text-align: center;
@@ -55,13 +48,14 @@ main {
 .action_button i {
   position: relative;
   z-index: 1;
-  font-size: 32px;
+  font-size: 18px;
   color: white;
   border: none;
 }
 
 #xaiMethodDropdown {
     padding: 10px;
+    font-size: 18px;
     background-color: #f0f0f0;
     border: 1px solid #009474;
 }
@@ -82,6 +76,8 @@ main {
     padding: 20px;
     margin-bottom: 20px;
     margin-left: 20px;
+    max-height: 60vh;
+
 }
 
 .network.pane {
@@ -94,6 +90,8 @@ main {
     padding: 20px;
     margin-bottom: 20px;
     margin-right: 20px;
+    max-height: 60vh;
+
 }
 
 /* Updated styles for image titles and text */
@@ -106,7 +104,7 @@ main {
     padding: 5px 10px;
     text-align: center;
     margin-bottom: 0;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: bold;
 }
 
@@ -134,7 +132,12 @@ main {
 .predictionandlabel {
     text-align: center;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 18px;
+}
+
+.xai_info {
+    text-align: justify;
+    font-size: 14px;
 }
 
 
