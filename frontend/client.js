@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set explanation text to default
     updateXaiInfoText(xaiMethodSelector.value);
 
-    // Declare selectedNodesByColumn and selectedPathId outside the event listener
+    // Set Node defaults for startup
     let selectedNodesByColumn = { '1': '1_8', '2': '2_7' };
     let selectedPathId = null; // Variable to store the ID of the selected path
     let randomIndex;  // Index of Input Image in MNIST dataset, used as input when calling explain_prediction

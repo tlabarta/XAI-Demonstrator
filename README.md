@@ -18,7 +18,7 @@ the network's prediction, and the corresponding heatmap (see the draft in the im
 The visualization of the network architecture needs to include at least the neurons from the hidden and output layers. As we can condition the LRP/CRP heatmaps on hidden and output neurons, these should be selectable in your demo by clicking on them. The displayed heatmap should dynamically recompute and update.
 
 ### XAI-Backend
-For your convenience we provide the code for training and explaining the network in the [examples.ipynb](./examples.ipynb) notebook.
+For your convenience we provide the code for training and explaining the network in the [examples.ipynb](./demo_and_defaults.ipynb) notebook.
 Feel free to use the provided code as part of your backend. Please see [Set up](#set-up:) section below for the details on the required dependencies.
 
 ### Expectation
@@ -29,7 +29,7 @@ While a polished, production-ready demo is not expected, your demo should be fun
 
 ## Set up:
 
-For running the [examples.ipynb](./examples.ipynb) you need to have Python 3.11. You can set up a conda environment, for example, with
+For running the [examples.ipynb](./demo_and_defaults.ipynb) you need to have Python 3.11. You can set up a conda environment, for example, with
 ```bash
 conda create --name demo_hhi python=3.11
 ```
