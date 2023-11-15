@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Declare selectedNodesByColumn and selectedPathId outside the event listener
     let selectedNodesByColumn = { '1': '1_8', '2': '2_7' };
     let selectedPathId = null; // Variable to store the ID of the selected path
+    let randomIndex;  // Index of Input Image in MNIST dataset, used as input when calling explain_prediction
+
 
     // Set initial default selection
     for (const column in selectedNodesByColumn) {
@@ -46,25 +48,35 @@ document.addEventListener('DOMContentLoaded', function () {
         updateXaiInfoText(xaiMethodSelector.value);
         document.getElementById('currentXAIselection').textContent = "XAI Method: " + xaiMethodSelector.value;
         document.getElementById('selectedNeuron').textContent = "Selected Neuron: 19";
-        socket.emit('explain_prediction', { xai_method: xaiMethodSelector.value });
+        socket.emit('explain_prediction', { xai_method: xaiMethodSelector.value,
+                                                random_index: randomIndex,
+                                                hiddenNeuron: selectedHiddenNeuronId,
+                                                outputNeuron: selectedOutputNeuronId});
     });
 
     document.getElementById('action_button').addEventListener('click', function () {
         // Emit a custom event to the server
-        socket.emit('button_click', { xai_method: xaiMethodSelector.value });
+        socket.emit('button_click', { xai_method: xaiMethodSelector.value, hiddenNeuron: selectedHiddenNeuronId,
+                                        outputNeuron: selectedOutputNeuronId });
+        console.log("buttonclick_emitted hidden Index: "+selectedHiddenNeuronId);
+        console.log("buttonclick_emitted hidden Index: "+selectedOutputNeuronId);
     });
 
     // Listen for the 'input_image' event from the server
     socket.on('input_image', function (data) {
         // Update the src attribute of the img element with the received image path
         document.getElementById('input_img').src = data.data + '?' + new Date().getTime();
+        randomIndex = data.random_index;
+        console.log("Received random_index: "+ randomIndex);
+
     });
 
     // Listen for the 'prediction' event from the server
     socket.on("prediction", function (data) {
         var prediction = data.prediction;
         var actual_label = data.actual_label;
-        console.log(prediction);
+        console.log("Prediction received: " +prediction);
+        console.log("Actual received: " +actual_label);
 
         const responseText = document.getElementById('prediction');
         responseText.textContent = 'Predicted number: ' + String(prediction);
@@ -75,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     socket.on("heatmap", function (data) {
         var heatmapResponse = data.data;
-        console.log(heatmapResponse)
+        console.log("Heatmap Response: "+heatmapResponse);
         document.getElementById('explanation_img').src = heatmapResponse + '?' + new Date().getTime();
     });
 
@@ -88,6 +100,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const clickedColumn = this.id.split('_')[0];
             const clickedNodeId = this.id.split('_')[1];
 
+            console.log('Clicked Node ID:', this.id);
+
+
             // Update the selectedHiddenNeuronId or selectedOutputNeuronId based on the clicked column
             if (clickedColumn === '1') {
                 selectedHiddenNeuronId = clickedNodeId;
@@ -96,6 +111,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 selectedOutputNeuronId = clickedNodeId;
                 document.getElementById('selectedOutputNeuron').textContent = "Selected Output Neuron: " + clickedNodeId;
             }
+
+            socket.emit('explain_prediction', { xai_method: xaiMethodSelector.value,
+                                                random_index: randomIndex,
+                                                hiddenNeuron: selectedHiddenNeuronId,
+                                                outputNeuron: selectedOutputNeuronId});
+            console.log("emitted random Index: " + randomIndex);
+            console.log("explain_emitted hidden Index: " + selectedHiddenNeuronId);
+            console.log("explain_emitted output Index: " + selectedOutputNeuronId);
 
             // Check if another node is selected in the same column
             if (selectedNodesByColumn[clickedColumn]) {
@@ -108,9 +131,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
             }
-
-            console.log('Clicked Node ID:', this.id);
-            console.log('Successful');
 
             // Change the fill color to green
             this.style.fill = 'rgb(0, 148, 116)';

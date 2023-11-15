@@ -1,3 +1,5 @@
+import asyncio
+
 from aiohttp import web
 import socketio
 import argparse
@@ -57,7 +59,6 @@ def connect(sid, environ):
 async def button_click(sid, data):
     # Call select_input when the button is clicked
     await select_input(sid, data)
-    await explain_prediction(sid, data)
 
 @sio.event
 async def select_input(sid, data):
@@ -74,16 +75,37 @@ async def select_input(sid, data):
     save_rand_img(testset[random_index])
     random_image_path = "website_img/input.png"
 
+    # Pass random_index to explain_prediction
+    await asyncio.gather(
+        sio.emit('input_image', {'data': random_image_path, 'random_index': random_index}, room=sid),
+
+        explain_prediction(sid, data, random_index)
+    )
+
+    print(f"Sent random_index: {random_index}")
+    print(f"Sent prediction: {prediction}")
+    print(f"Sent actual: {actual_label}")
+
+
     # Send the random image path to the client
-    await sio.emit('input_image', {'data': random_image_path}, room=sid)
     await sio.emit('prediction', {'prediction': prediction, 'actual_label': actual_label}, room=sid)
 
 
 @sio.event
-async def explain_prediction(sid, data):
+async def explain_prediction(sid, data, random_index=None):
     # Get the selected XAI method from the client
-    xai_method = data.get('xai_method')
-    print(xai_method)
+    xai_method = data['xai_method']
+
+    if random_index is None and 'random_index' in data:
+        random_index = data['random_index']
+
+
+    hiddenIDX = int(data['hiddenNeuron'])
+    outputIDX = int(data['outputNeuron'])
+
+    print(f"Received hidden_index: {hiddenIDX}")
+    print(f"Received hidden_index: {outputIDX}")
+
 
     heatmap_path = None
 
@@ -93,8 +115,7 @@ async def explain_prediction(sid, data):
         print("lrp success")
     elif xai_method == 'crp':
         # Create an instance of CRPAnalyzer
-        crp_analyzer = CRPAnalyzer(net)
-
+        crp_analyzer = CRPAnalyzer(net, random_index, hiddenIDX, outputIDX)
         # Call the explain_prediction method to get the heatmap
         heatmap_path = crp_analyzer.explain_prediction()
         print(heatmap_path)

@@ -9,13 +9,12 @@ from crp.attribution import CondAttribution
 from torchvision import transforms
 class CRPAnalyzer():
 
-    def __init__(self, model):#, selected_hidden_neuron, selected_output_neuron):
+    def __init__(self, model, randID, hiddenIDX, outputIDX):#, selected_hidden_neuron, selected_output_neuron):
         self.model = model
         self.img = "frontend/website_img/input.png"
-        self.idx = 19  # index of the data sample in the dataset
-        self.hidden_neuron_idx = 8#selected_hidden_neuron #8  # 0-15 or None    # index of the hidden neuron (which concept) we condition the explanation on
-        self.output_neuron_idx = 7#selected_output_neuron #7  # 0-9             # index of the output neuron (which output-class) we condition the explanation on
-
+        self.idx = randID  # index of the data sample in the dataset
+        self.hidden_neuron_idx = hiddenIDX#8#selected_hidden_neuron #8  # 0-15 or None    # index of the hidden neuron (which concept) we condition the explanation on
+        self.output_neuron_idx = outputIDX#7#selected_output_neuron #7  # 0-9             # index of the output neuron (which output-class) we condition the explanation on
     def preprocess_image(self):
         # Open the image
         image = Image.open(self.img)
