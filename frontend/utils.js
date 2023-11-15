@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set explanation text to default
     updateXaiInfoText(xaiMethodSelector.value);
 
-    // Get the initial default selection by column
+    // Declare selectedNodesByColumn and selectedPathId outside the event listener
     let selectedNodesByColumn = { '1': '1_8', '2': '2_7' };
+    let selectedPathId = null; // Variable to store the ID of the selected path
 
     // Set initial default selection
     for (const column in selectedNodesByColumn) {
@@ -30,8 +31,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('selectedHiddenNeuron').textContent = "Selected Hidden Neuron: " + selectedHiddenNeuronId;
     document.getElementById('selectedOutputNeuron').textContent = "Selected Output Neuron: " + selectedOutputNeuronId;
 
-    socket.emit('select_input', { xai_method: selectedXaiMethod });
-    socket.emit('explain_prediction', { xai_method: xaiMethodSelector.value });
+    // Highlight the initial default path
+    const initialPathId = `path_${selectedNodesByColumn['1']}_${selectedNodesByColumn['2']}`;
+    const initialPath = document.getElementById(initialPathId);
+    if (initialPath) {
+        initialPath.style.stroke = 'rgb(0, 148, 116)';
+        initialPath.style.strokeWidth = 3;
+        selectedPathId = initialPathId; // Update the selectedPathId variable
+    }
 
     // Add an event listener for the change event on the dropdown
     xaiMethodSelector.addEventListener('change', function () {
@@ -74,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Select the default nodes
     const nodes = document.querySelectorAll('.node');
-    let selectedPathId = null; // Variable to store the ID of the selected path
 
     // Add a click event listener to each node
     nodes.forEach(node => {
@@ -120,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // Check if there was a previously selected path and change its color back to black
             if (selectedPathId) {
                 const previousPath = document.getElementById(selectedPathId);
-                console.log(selectedPathId)
                 if (previousPath) {
                     previousPath.style.stroke = 'rgb(80, 80, 80)';
                     previousPath.style.strokeWidth = 0.5;
@@ -132,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Change the color of the path connecting the selected nodes to green
             const newPath = document.getElementById(pathId);
-            console.log(pathId)
             if (newPath) {
                 newPath.style.stroke = 'rgb(0, 148, 116)';
                 newPath.style.strokeWidth = 3;
