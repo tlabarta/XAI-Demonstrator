@@ -31,4 +31,7 @@ pip install -r requirements.txt
 
 If you are not familiar with conda, you can also just manually install the dependencies listed.
 
+## Screenshot: 
+
+![Screenshot from Application](frontend/website_img/screenshot.png)
 
