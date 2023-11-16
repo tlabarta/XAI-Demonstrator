@@ -1,35 +1,25 @@
-# Build an interactive demonstrator for XAI
-This repository contains the coding challenge for the *XAI Demonstrators and Automation* opening at Frauenhofer HHI.
+# Interactive demonstrator for XAI
+This repository contains an interactive XAI demonstrator for [Concept Relevance Propagation (CRP)](https://www.hhi.fraunhofer.de/en/departments/ai/technologies-and-solutions/concept-relevance-propagation.html).
 
-## The Challenge
-The goal of this challenge is to closely resemble a typical task you would encounter in this position at HHI.
-Your job is to prototype a simple interactive web-application that showcases two XAI-techniques developed at HHI:
-- [Layer-wise Relevance Propagation (LRP)](https://www.hhi.fraunhofer.de/en/departments/ai/technologies-and-solutions/layer-wise-relevance-propagation.html) 
-- [Concept Relevance Propagation (CRP)](https://www.hhi.fraunhofer.de/en/departments/ai/technologies-and-solutions/concept-relevance-propagation.html).
+This technique allows to measure the (conditional) relevance a neural network assigns to the individual parts of an input. 
 
-These two techniques allow to measure the (conditional) relevances a neural network assigns to the individual parts of an input. 
+For this demo, a simple feed-forward neural network with one hidden layer was visualized alongside the input-image, 
+the network's prediction, and the corresponding heatmap.
 
+The visualization of the network architecture needs to includes all layers. As we can condition the CRP heatmaps on hidden and output neurons, they are selectable in the demo by clicking on them, using them as input parameters for CRP. The displayed heatmap dynamically recomputes and update after selecting new neurons.
 
-For this demo, a simple feed-forward neural network with one hidden layer should be visualized alongside the input-image, 
-the network's prediction, and the corresponding heatmap (see the draft in the image below). 
+### Frontend
+The frontend was built using HTML ('file: index.html'), CSS ('main.css') and JavaScript ('client.js'). The input from MNIST and the explanation are loaded as '.png' images from 'frontend/website_img' into the website. The feed-forward network was visualized with a SVG file built into the HTML. The SVG was initially created with the [NN SVG tool by Alex Lenail](http://alexlenail.me/NN-SVG/LeNet.html). All dynamic formatting like coloring of selected nodes and weights was developed additionally. 
 
-<img src="imgs/thing_that_your_boss_sketched_in_30_seconds_in_a_meeting.jpg" alt="Demo-Draft" width="800"> 
+### Backend
+The backend was built in a client-server architecture using socket.io. The client is developed in JavaScript ('client.js') while the server ('heatmap_server.py') is written in Python. Additional server dependencies are  'model.py' where the feed-forward architecture is defined and 'crpAnalyze.py' which builds a CRP Analyzer to explain incoming predictions based on input samples and hidden and output neuron IDs. The file 'lrpAnalyze.py' for building a LRP Analyzer is still work in progress (WIP) and is not to be used.
 
-The visualization of the network architecture needs to include at least the neurons from the hidden and output layers. As we can condition the LRP/CRP heatmaps on hidden and output neurons, these should be selectable in your demo by clicking on them. The displayed heatmap should dynamically recompute and update.
-
-### XAI-Backend
-For your convenience we provide the code for training and explaining the network in the [examples.ipynb](./demo_and_defaults.ipynb) notebook.
-Feel free to use the provided code as part of your backend. Please see [Set up](#set-up:) section below for the details on the required dependencies.
-
-### Expectation
-While a polished, production-ready demo is not expected, your demo should be functional and demonstrate your skills. We will discuss your technical and design choices during the interview. Your also should document how to setup and execute your demo in detail and list all required dependencies.
-<br><br>
-**You are free to choose any frontend frameworks/libraries to create the web-app/demo, and encouraged to ignore any specifications listed if you think it would generate a better visualization.**
-
+### demo_and_defaults.ipynb
+This file was adapted from the examples.ipynb to allow for setting the default input and heatmaps to display when starting the demo. It can also be used to retrain the model or changing its architecture. Remember to adapt 'model.py' accordingly when changing the architecture.
 
 ## Set up:
 
-For running the [examples.ipynb](./demo_and_defaults.ipynb) you need to have Python 3.11. You can set up a conda environment, for example, with
+For running the demo you need to have Python 3.11. You can set up a conda environment, for example, with
 ```bash
 conda create --name demo_hhi python=3.11
 ```

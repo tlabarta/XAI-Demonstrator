@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
     socket.on("heatmap", function (data) {
         var heatmapResponse = data.data;
         console.log("Heatmap Response: "+heatmapResponse);
-        document.getElementById('explanation_img').src = heatmapResponse + '?' + new Date().getTime();
+        document.getElementById('explanation_img').src = '/' + heatmapResponse+ '?' + new Date().getTime();
     });
 
     // Select the default nodes

@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.colors import Normalize
 from PIL import Image
 from PIL import ImageOps
@@ -44,18 +45,19 @@ class CRPAnalyzer():
 
 
         attribution = attributor(x, conditions=conditions)
+
         heatmap = attribution.heatmap # THIS IS THE HEATMAP YOU NEED TO SHOW
+        vis_heatmap = heatmap.permute(1, 2, 0)
 
-        #v = max(abs(heatmap.max().item()), abs(heatmap.min().item()))
+        heatmap_path = "frontend/website_img/heatmap.png"
 
+        vis_heatmap = vis_heatmap[:, :, np.newaxis]  # Add a channel dimension
+        normalized_vis_heatmap = (vis_heatmap - vis_heatmap.min()) / (vis_heatmap.max() - vis_heatmap.min())
+        plt.imsave(heatmap_path, normalized_vis_heatmap.numpy(), cmap='seismic')
 
-        #norm = Normalize(vmin=-v, vmax=v)
-        #norm_heatmap = norm(heatmap)
-
-        heatmap_path = "website_img/heatmap.png"
-
-        tensor_to_pil = transforms.ToPILImage()(heatmap.squeeze_(0)).resize((640, 480))
-        tensor_to_pil.save("frontend/"+heatmap_path,"PNG")
+        vis_heatmap = Image.open(heatmap_path)
+        resized_heatmap = vis_heatmap.resize((640, 480))
+        resized_heatmap.save(heatmap_path)
 
         return heatmap_path
 
