@@ -5,6 +5,7 @@ from PIL import Image
 from PIL import ImageOps
 
 
+
 from zennit.composites import EpsilonPlus
 from crp.attribution import CondAttribution
 from torchvision import transforms
@@ -47,17 +48,29 @@ class CRPAnalyzer():
         attribution = attributor(x, conditions=conditions)
 
         heatmap = attribution.heatmap # THIS IS THE HEATMAP YOU NEED TO SHOW
-        vis_heatmap = heatmap.permute(1, 2, 0)
+        #vis_heatmap = heatmap.permute(1, 2, 0)
+        #heatmap_path = "website_img/heatmap.png"
 
-        heatmap_path = "frontend/website_img/heatmap.png"
+        #vis_heatmap = vis_heatmap[:, :, np.newaxis]  # Add a channel dimension
 
-        vis_heatmap = vis_heatmap[:, :, np.newaxis]  # Add a channel dimension
-        normalized_vis_heatmap = (vis_heatmap - vis_heatmap.min()) / (vis_heatmap.max() - vis_heatmap.min())
-        plt.imsave(heatmap_path, normalized_vis_heatmap.numpy(), cmap='seismic')
+        #v = max(abs(heatmap.max().item()), abs(heatmap.min().item()))
+        #norm = Normalize(vmin=-v, vmax=v)
+        # Apply the normalization to the data
+        #normalized_vis_heatmap = norm(vis_heatmap)
 
-        vis_heatmap = Image.open(heatmap_path)
-        resized_heatmap = vis_heatmap.resize((640, 480))
-        resized_heatmap.save(heatmap_path)
+
+        # plt.imsave("frontend/" + heatmap_path, vis_heatmap.numpy(), cmap='bwr')
+        #
+        # vis_heatmap = Image.open("frontend/" + heatmap_path)
+        # resized_heatmap = vis_heatmap.resize((640, 480))
+        # resized_heatmap.save("frontend/" + heatmap_path)
+
+
+        # norm_heatmap = (heatmap - heatmap.min()) / (heatmap.max() - heatmap.min())
+
+        heatmap_path = "website_img/heatmap.png"
+        tensor_to_pil = transforms.ToPILImage()(heatmap.squeeze_(0)).resize((640, 480))
+        tensor_to_pil.save("frontend/" + heatmap_path, "PNG")
 
         return heatmap_path
 
