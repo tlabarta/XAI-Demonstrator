@@ -33,6 +33,8 @@ main {
     margin-right: 10px;
     margin-left: 20px;
     margin-bottom: 5px;
+    border-radius: 10px;
+
 }
 
 .action_button:hover,
@@ -58,6 +60,9 @@ main {
     font-size: 18px;
     background-color: #f0f0f0;
     border: 1px solid #009474;
+    height: 38px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .container {
