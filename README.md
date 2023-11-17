@@ -32,7 +32,11 @@ pip install -r requirements.txt
 If you are not familiar with conda, you can also just manually install the dependencies listed.
 
 
-After installing all requirements, just execute the `heatmap_server.py` and open `localhost:8080` in your browser.
+After installing all requirements, just execute the `heatmap_server.py` in your IDE or run it in your command shell. To access the demo, open `localhost:8080` in your browser as final step.
+
+```bash
+python heatmap_server.py
+```
 
 
 ## Screenshot: 
